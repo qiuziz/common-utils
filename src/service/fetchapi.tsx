@@ -9,7 +9,7 @@
 import 'whatwg-fetch';
 import { HttpDES, SED, sign } from '../common//encrypt-des';
 import { Toast } from 'antd-mobile';
-import { ToastInfo, getUrlParams, LocalStorage } from 'src/common';
+import { ToastInfo, LocalStorage } from 'src/common';
 
 interface ConfigType {
 	loadingDelay?: number;
