@@ -13,16 +13,8 @@ import { LocalStorage } from 'src/common/local-storage';
 
 const dev = !process.env.REACT_APP_DES;
 
-let DES_KEY, DES_IV;
-const urlParams = getUrlParams();
-const systemCode = urlParams.systemCode || LocalStorage.getItem('systemCode');
-if (systemCode === 'H5GAT') {
-  DES_KEY = dev ? 'D5ED1E14' : '7FAFB8D5';
-  DES_IV = dev ? '9ACBE716' : '2A44A90B';
-} else {
-  DES_KEY = dev ? '026F298F' : '8D365461';
-  DES_IV = dev ? '05CBEB03' : 'FB2317DF';
-}
+const DES_KEY = dev ? 'AAAAAAA' : 'BBBBBBBB';
+const DES_IV = dev ? 'CCCCCCC' : 'CCCCCCCC';
 
 
 // 业务加密
