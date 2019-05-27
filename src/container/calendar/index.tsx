@@ -2,7 +2,7 @@
  * @Author: zhaoyn
  * @Date: 2019-03-04 14:38:25
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-10 15:08:01
+ * @Last Modified time: 2019-05-27 13:52:40
  */
 
 import * as React from 'react';
@@ -49,11 +49,9 @@ export class CalendarDemo extends React.Component<PropsType, any> {
     console.log(startTime, endTime);
   }
 
-  onCancel = () => {
+  onClose = () => {
     this.setState({
       show: false,
-      startTime: undefined,
-      endTime: undefined,
     });
   }
 
@@ -87,8 +85,9 @@ export class CalendarDemo extends React.Component<PropsType, any> {
         <Button onClick={this.chooseDay([0, 6])}>周末不可选</Button>
         <Button onClick={this.chooseDay([3])}>周三不可选</Button>
         <QCalendar
-          visible={show}
-          onCancel={this.onCancel}
+					visible={show}
+					maskClosable={true}
+          onClose={this.onClose}
           onConfirm={this.onConfirm}
           defaultDate={now}
           initalMonths={3}
