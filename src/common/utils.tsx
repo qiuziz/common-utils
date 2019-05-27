@@ -6,7 +6,7 @@ import queryString from 'qs';
  * @description m => km
  * @param value string
  */
-export function convert(value: string): string {
+export function m2km(value: string): string {
 	if (!value) {
 		console.log('value 不能为空')
 		return '0';
@@ -14,6 +14,7 @@ export function convert(value: string): string {
 	let result = parseInt(value);
 	return result > 1000 ? ((result / 1000).toFixed(2) + ' k') : result + ' ';
 }
+
 /**
  * @description digital toFixed
  * @param value string
@@ -29,10 +30,15 @@ export function digitalFormat(value: string, decimals: number = 2): string {
 	return Number(result.toFixed(decimals)).toString();
 }
 
+/**
+ * @description 18512345678 => 185****5678
+ * @param value string
+ */
 export const formatPhone = (phone: string) => {
 	if (!phone) return '';
 	return phone.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2");
 }
+
 /**
  * @description sub toFixed
  * @param reduction string
@@ -86,9 +92,11 @@ export const sortForAscii = (obj: object, lowerCase = false,caseSensitive: boole
 		return '';
 	}
 	let upperObj = {};
+
+	// onject array date转换成默认字段
 	Object.keys(obj).forEach(key => {
 		if ((obj[key] || obj[key] === 0) && !isDate(obj[key])) {
-			upperObj[key] = (isObject(obj[key]) || isArray(obj[key]) || isDate(obj[key])) ? 'MID' : (obj[key] + '');
+			upperObj[key] = (isObject(obj[key]) || isArray(obj[key]) || isDate(obj[key])) ? 'SHENGDACPROJECT' : (obj[key] + '');
 		}
 	});
 
@@ -140,17 +148,9 @@ export const dateFormat = (date: Date, format: string = 'yyyy-MM-dd hh:mm:ss'): 
 }
 
 /**
- * @description 不显示秒
- * @param date
- */
-export const noViewSecond = (date: string) => {
-	return date ? date.substr(0, 16) : '';
-}
-
-/**
  * @description 百度地图经纬度转换为腾讯/高德地图经纬度
  */
-export const bMapTransQQMap = (lng, lat) => {
+export const bMapTransQQMap = (lng: number, lat: number) => {
 	let x_pi = 3.14159265358979324 * 3000.0 / 180.0;
 	let x = lng - 0.0065;
 	let y = lat - 0.006;
@@ -169,7 +169,7 @@ export const bMapTransQQMap = (lng, lat) => {
 /**
  * @description 腾讯/高德地图经纬度转换为百度地图经纬度
  */
-export const qqMapTransBMap = (lng, lat) => {
+export const qqMapTransBMap = (lng: number, lat: number) => {
 	let x_pi = 3.14159265358979324 * 3000.0 / 180.0;
 	let x = lng;
 	let y = lat;
@@ -183,6 +183,7 @@ export const qqMapTransBMap = (lng, lat) => {
 		lat: lats
 	}
 }
+
 /**
  * @description antd-mobile Toast二次封装
  * @param content 

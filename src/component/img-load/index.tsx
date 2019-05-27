@@ -1,66 +1,84 @@
 /*
- * @Author: zhaoyn
- * @Date: 2019-03-04 14:09:46
+ * @Author: qiuz
+ * @Github: <https://github.com/qiuziz>
+ * @Date: 2019-05-27 10:08:14
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-09 13:35:48
+ * @Last Modified time: 2019-05-27 11:24:38
  */
 
 import './index.less';
 
-import * as React from 'react';
+import React from 'react';
 import classNames from 'classnames';
+import DEFAULT from './default.png';
 
 interface propTypes {
-	className?: Array<any> | string;
-	imgClassName?: Array<any> | string;
-	defaultImgClassName?: Array<any> | string;
-	imgSrc: string,
-	defaultSrc: string
+	className?: string;
+	style?: object;
+	defaultStyle?: object;
+	src: string,
+	defaultSrc?: string
+	onLoad?: (load: boolean) => void;
 }
 
 export class QImgLoad extends React.Component<propTypes, any> {
 	static defaultProps = {
 		className: '',
-		imgClassName: '',
-		defaultImgClassName: '',
-		imgSrc: '',
-		defaultSrc: ''
+		style: {},
+		defaultStyle: {},
+		src: '',
+		defaultSrc: DEFAULT,
+		onLoad: (load: boolean) => { console.log(load)}
 	}
-	ref: any;
+
 	constructor(props: propTypes) {
 		super(props);
 
 		this.state = {
-			completed: false
+			load: false,
+			once: true,
+			imgSrc: props.defaultSrc
 		}
 	}
 
-	componentWillMount() {
 
-	}
-
-	componentDidMount() {
-
-	}
-
-	componentWillReceiveProps(newProps) {
-	}
-	componentWillUnmount() {
-
-	}
-
-	handleImageLoad = () => {
+	loadSuccess = () => {
+		const { src, onLoad } = this.props;
 		this.setState({
-			completed: true
-		})
+			load: true,
+			once: false,
+			imgSrc: src
+		}, () => onLoad(true));
 	}
+
+	loadError = () => {
+		const { onLoad } = this.props;
+		this.setState({
+			once: false,
+			load: false,
+		}, () => onLoad(false));
+	}
+	
 	render() {
-		const { className, imgSrc, defaultSrc, imgClassName, defaultImgClassName } = this.props;
-		const { completed } = this.state;
+		const { className, src, defaultSrc, style, defaultStyle } = this.props;
+		const { imgSrc, once } = this.state;
 		return (
-			<div className={classNames('img-componrent-wrap', className)}>
-				<img className={classNames('shop-img', imgClassName)} src={imgSrc} onLoad={this.handleImageLoad} ref={(ref) => this.ref = ref} />
-				{!completed && <img className={classNames('default-shop-img', defaultImgClassName)} src={defaultSrc} />}
+			<div className={classNames('q-load__img__content', className)}>
+				<img
+					className="q-img"
+					src={imgSrc}
+					style={style}
+				/>
+				{
+					once &&
+					<img
+						className="q-img__load"
+						src={src}
+						onLoad={this.loadSuccess}
+						onError={this.loadError}
+					/>
+				}
+				
 			</div>
 		)
 	}

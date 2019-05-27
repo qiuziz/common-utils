@@ -6,15 +6,14 @@
  * @Last Modified time: 2019-01-07 18:57:07
  */
 
-import * as CryptoJS from 'crypto-js';
+import CryptoJS from 'crypto-js';
 import { sortForAscii } from './utils';
-import { getUrlParams } from 'src/common/utils';
-import { LocalStorage } from 'src/common/local-storage';
 
+// 打包环境
 const dev = !process.env.REACT_APP_DES;
 
 const DES_KEY = dev ? 'AAAAAAA' : 'BBBBBBBB';
-const DES_IV = dev ? 'CCCCCCC' : 'CCCCCCCC';
+const DES_IV = dev ? 'CCCCCCC' : 'DDDDDDDD';
 
 
 // 业务加密
@@ -48,6 +47,7 @@ export const encryptByDES = function (message: string, key: string, iv: string) 
   // 加密出来是一个16进制的字符串
   return encrypted.toString();
 };
+
 // des解密
 export const decryptByDESModeEBC = function (ciphertexat: string, key: string, iv: string) {
   // 把私钥转换成16进制的字符串
@@ -70,6 +70,7 @@ export const decryptByDESModeEBC = function (ciphertexat: string, key: string, i
   const result_value = decrypted.toString(CryptoJS.enc.Utf8);
   return result_value;
 };
+
 // 这个默认是32位的
 export const md5Encode = function (str: any) {
   return CryptoJS.MD5(str).toString();

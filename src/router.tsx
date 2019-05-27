@@ -3,7 +3,7 @@
  * @Github: <https://github.com/qiuziz>
  * @Date: 2019-05-07 16:03:31
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-13 15:16:15
+ * @Last Modified time: 2019-05-27 13:35:09
  */
 
 import * as React from 'react';
@@ -15,16 +15,18 @@ import {
   CityList,
   CurrentLocation,
   CalendarDemo,
-  TabsDemo,
+	TabsDemo,
+	ImgLoadDemo,
+	Home
 } from './container';
 
-const routes = [
+export const routes = [
   {
     path: '/map',
     Component: CurrentLocation,
     exact: true,
     Layout: Layout,
-    title: '位置',
+    title: '地图',
   },
   {
     path: '/city',
@@ -44,6 +46,20 @@ const routes = [
     Component: TabsDemo,
     exact: true,
     title: '标签页',
+  },
+  {
+    path: '/img-demo',
+		Component: ImgLoadDemo,
+		Layout: Layout,
+    exact: true,
+    title: '图片加载',
+  },
+  {
+    path: '/home',
+		Component: Home,
+		Layout: Layout,
+    exact: true,
+    title: 'common-utils',
   },
 ];
 
