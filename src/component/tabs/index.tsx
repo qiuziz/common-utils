@@ -2,7 +2,7 @@
  * @Author: zhaoyn
  * @Date: 2019-03-04 14:38:25
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-13 15:06:19
+ * @Last Modified time: 2019-05-28 10:21:03
  */
 
 import React from 'react';
@@ -57,13 +57,12 @@ export class QTabs extends React.Component<PropsType, any> {
 
 
 	public render() {
-		const { tabs, children } = this.props;
+		const { children, ...rest__props } = this.props;
 		return (
 			<div className='q-tabs'>
 				<StickyContainer>
 		      <Tabs
-						tabs={tabs}
-		        initialPage={'t2'}
+						{...rest__props}
 						renderTabBar={this.renderTabBar}
 		      >
 		       {children}

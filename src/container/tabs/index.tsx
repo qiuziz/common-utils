@@ -2,7 +2,7 @@
  * @Author: zhaoyn
  * @Date: 2019-03-04 14:38:25
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-13 15:08:14
+ * @Last Modified time: 2019-05-28 10:37:55
  */
 
 import * as React from 'react';
@@ -62,17 +62,16 @@ export class TabsDemo extends React.Component<PropsType, any> {
 				<QTabs
 					tabs={tabs}
 					locateText={currentCity}
+					initialPage={1}
 					onLocateClick={this.selectCity}
         >
-					 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '1250px', backgroundColor: '#fff' }}>
-		          Content of first tab
-		        </div>
-		        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '1250px', backgroundColor: '#fff' }}>
-		          Content of second tab
-		        </div>
-		        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '1250px', backgroundColor: '#fff' }}>
-		          Content of third tab
-		        </div>
+					{
+						tabs.map((tab: any, index: number) =>
+							<div key={index} style={{ display: 'flex', paddingTop: '100px', justifyContent: 'center', height: '1250px', backgroundColor: '#fff' }}>
+			          Content of {tab.title} tab
+			        </div>
+						)
+					}
 				</QTabs>
 			</div>
 		);
