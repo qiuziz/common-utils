@@ -89,7 +89,7 @@ const App = () => {
           )
         })
       }
-      <Redirect to="/tabs-demo" />
+      <Redirect to="/home" />
     </Switch>
   )
 }
