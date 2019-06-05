@@ -3,13 +3,14 @@
  * @Github: <https://github.com/qiuziz>
  * @Date: 2019-05-07 16:03:31
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-27 13:35:09
+ * @Last Modified time: 2019-06-05 11:01:39
  */
 
 import * as React from 'react';
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Layout from './component/layout';
 import { HashHistory } from './common';
+
+import { Layout, Nav } from './component';
 
 import {
   CityList,
@@ -19,6 +20,7 @@ import {
 	ImgLoadDemo,
 	Home
 } from './container';
+import { NavBar, Icon } from 'antd-mobile';
 
 export const routes = [
   {
@@ -59,7 +61,8 @@ export const routes = [
 		Component: Home,
 		Layout: Layout,
     exact: true,
-    title: 'common-utils',
+		title: 'common-utils',
+		root: true,
   },
 ];
 
@@ -67,7 +70,7 @@ const App = () => {
   return (
     <Switch>
       {
-        routes.map(({ path, Layout, Component, exact, title }: any, index) => {
+        routes.map(({ path, Layout, Component, exact, title, root }: any, index) => {
 					return (
 						<Route
 							key={index}
@@ -79,10 +82,14 @@ const App = () => {
 	                const History = HashHistory(history, location);
 	                document.title = title;
 	                return Layout
-	                  ? <Layout {...props}>
-	                    <Component {...props} History={History} />
-	                  </Layout>
-	                  : <Component {...props} History={History} />
+		                  ? <Layout {...props}>
+												<Nav {...props} History={History} root={root} />
+		                    <Component {...props} History={History} />
+		                  </Layout>
+		                  : <div>
+													<Nav {...props} History={History} root={root} />
+													<Component {...props} History={History} />
+												</div>
 	              }
 							}
             />

@@ -10,26 +10,14 @@ import { withRouter } from 'react-router-dom';
 
 
 interface Props {
-  History: any;
+	History: any;
 }
 
 @(withRouter as any)
-export default class Layout extends React.Component<Props, {}> {
+export class Layout extends React.Component<Props, {}> {
 
 	constructor(props: any) {
 		super(props);
-		this.state = {
-			bodyHeight: {height: '100%'}
-		}
-	}
-	
-
-	onLeftClick = () => {
-		this.props.History.go(-1);
-	}
-
-	componentDidMount() {
-
 	}
 
   render () {

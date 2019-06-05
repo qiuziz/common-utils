@@ -2,7 +2,7 @@
  * @Author: zhaoyn
  * @Date: 2019-03-04 14:38:25
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-28 10:21:03
+ * @Last Modified time: 2019-06-05 11:05:44
  */
 
 import React from 'react';
@@ -13,6 +13,7 @@ import { Tabs } from 'antd-mobile';
 import PropsType from './props';
 import { TabBarPropsType, Models } from 'rmc-tabs';
 import LOCATE_ICON from 'src/assets/images/locate.png';
+declare var window: any;
 
 export class QTabs extends React.Component<PropsType, any> {
 	constructor(props: PropsType) {
@@ -27,11 +28,11 @@ export class QTabs extends React.Component<PropsType, any> {
 	}
 
 	componentDidMount() {
-
+		window.AppBar && window.AppBar.postMessage(JSON.stringify({toggle: '1'}));
 	}
 
 	componentWillUnmount() {
-
+		window.AppBar && window.AppBar.postMessage(JSON.stringify({toggle: '0'}));
 	}
 
 	componentWillReceiveProps(nextProps: PropsType) {

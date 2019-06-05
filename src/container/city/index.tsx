@@ -3,7 +3,7 @@
  * @Github: <https://github.com/qiuziz>
  * @Date: 2019-03-05 14:55:35
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-13 14:20:57
+ * @Last Modified time: 2019-06-05 11:05:29
  */
 
 import React from 'react';
@@ -71,11 +71,14 @@ export class CityList extends React.Component<PropsType, any> {
 	}
 
 	componentWillMount() {
+
 	}
 
 	componentDidMount() {
 		this.setState({ data: handleData(DATA) });
 	}
+
+
 
 	onSelectItem = (rowData: any) => () => {
 		LocalStorage.setItem('city', rowData);

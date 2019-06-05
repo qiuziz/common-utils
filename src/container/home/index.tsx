@@ -2,7 +2,7 @@
  * @Author: zhaoyn
  * @Date: 2019-03-04 14:38:25
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-05-27 13:33:49
+ * @Last Modified time: 2019-06-05 11:22:52
  */
 
 import * as React from 'react';
@@ -34,17 +34,23 @@ export class Home extends React.Component<PropsType, any> {
 
 	}
 
+	go = (path: string) => () => {
+		this.props.History.push({
+			pathname: path
+		})
+	}
+
 
 	public render() {
 		return (
 			<div className='home'>
-				<h1>Common Utils</h1>
+				<h1></h1>
 				<List>
 					{
 						routes.map((route: any, index: number) => {
 							if (route.path !== '/home') {
 							return <List.Item key={index} arrow="horizontal">
-											<Link to={route.path}>{route.title}</Link>
+											<a onClick={this.go(route.path)}>{route.title}</a>
 										</List.Item>
 							}
 						})
