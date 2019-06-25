@@ -3,7 +3,7 @@
  * @Github: <https://github.com/qiuziz>
  * @Date: 2019-01-09 14:54:17
  * @Last Modified by: qiuz
- * @Last Modified time: 2019-06-05 11:24:34
+ * @Last Modified time: 2019-06-25 13:57:13
  */
 
 import queryString from 'qs';
@@ -17,11 +17,10 @@ interface PropType {
 }
 
 export const HashHistory = (history: any, location: any) => {
-	const urlParams: any = queryString.parse(location.search, { ignoreQueryPrefix: true });
 	return {
 		push: (params: PropType) => {
+			const urlParams: any = queryString.parse(location.search, { ignoreQueryPrefix: true });
 			const search = queryString.stringify({...urlParams, ...queryString.parse(params.search, { ignoreQueryPrefix: true })});
-			console.log(location, `${window.location.origin}/#${params.pathname}?${search}`);
 			if (window.NavtiveRoute) {
 				window.NavtiveRoute.postMessage(JSON.stringify({method: 'PUSH', url: `${window.location.origin}/#${params.pathname}?${search}`}))
 			} else {
@@ -34,6 +33,7 @@ export const HashHistory = (history: any, location: any) => {
 		},
 		go: (n: number) => history.go(n),
 		replace: (params: PropType) => {
+			const urlParams: any = queryString.parse(location.search, { ignoreQueryPrefix: true });
 			const search = queryString.stringify({...urlParams, ...queryString.parse(params.search, { ignoreQueryPrefix: true })});
 			history.replace({
 				...params,
